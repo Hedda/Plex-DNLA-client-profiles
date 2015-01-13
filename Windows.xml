@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Client name="Windows">
+  <!-- Author: Plex Inc. -->
+  <!-- cf http://blogs.msdn.com/b/b8/archive/2012/06/08/building-a-rich-and-extensible-media-platform.aspx
+       cf http://msdn.microsoft.com/en-us/library/windows/apps/hh986969.aspx -->
+  <TranscodeTargets>
+    <VideoProfile protocol="http" container="mpegts" codec="h264" audioCodec="aac,ac3,eac3" context="streaming">
+      <!-- Inspired by Handbrake's Universal profile -->
+      <Setting name="VideoEncodeFlags" value="-x264opts cabac=0" />
+      <Setting name="SubtitleSize" value="100" />
+    </VideoProfile>
+    <VideoProfile protocol="slss" container="mp4" codec="h264" audioCodec="aac" context="streaming">
+      <!-- Inspired by Handbrake's Universal profile -->
+      <Setting name="VideoEncodeFlags" value="-x264opts cabac=0:keyint=50:min_keyint=50:scenecut=0" />
+      <Setting name="SubtitleSize" value="100" />
+      <Setting name="AudioSyncFlags" value="3" />
+    </VideoProfile>
+    <VideoProfile protocol="hls" container="mpegts" codec="h264" audioCodec="aac" context="streaming">
+      <!-- Inspired by Handbrake's Universal profile -->
+      <Setting name="VideoEncodeFlags" value="-x264opts cabac=1:level=41" />
+      <Setting name="SubtitleSize" value="100" />
+    </VideoProfile>
+    <VideoProfile container="mp4" codec="h264" audioCodec="aac,ac3,eac3" context="static" />
+    <MusicProfile container="mp3" codec="mp3" />
+    <PhotoProfile container="jpeg" />
+  </TranscodeTargets>
+  <DirectPlayProfiles>
+    <VideoProfile container="mp4,mov" codec="h264,mpeg4" audioCodec="aac,ac3,eac3,mp3,pcm" />
+    <VideoProfile container="mpegts" codec="h264" audioCodec="aac,ac3,eac3,mp3,mp2,pcm" />
+    <VideoProfile container="asf" codec="wmv2,wmv3,vc1" audioCodec="wmav2,wmapro,wmavoice" />
+    <VideoProfile container="avi" codec="mpeg4,msmpeg4,mjpeg" audioCodec="mp3,ac3,eac3,mp2,pcm" />
+    <MusicProfile container="asf" codec="wmav2,wmapro,wmavoice" />
+    <MusicProfile container="mp4" codec="aac" />
+    <MusicProfile container="mp3" codec="mp3" />
+    <PhotoProfile container="jpeg" />
+  </DirectPlayProfiles>
+  <CodecProfiles>
+    <VideoAudioCodec name="aac">
+      <Limitations>
+        <UpperBound name="audio.channels" value="8" />
+        <NotMatch name="audio.profile" value="main" />
+        <UpperBound name="audio.samplingRate" value="48000" />
+      </Limitations>
+    </VideoAudioCodec>
+    <MusicCodec name="aac">
+      <Limitations>
+        <NotMatch name="audio.profile" value="main" />
+        <UpperBound name="audio.samplingRate" value="48000" />
+      </Limitations>
+    </MusicCodec>
+    <VideoAudioCodec name="eac3">
+      <Limitations>
+        <UpperBound name="audio.channels" value="8" />
+      </Limitations>
+    </VideoAudioCodec>
+    <VideoAudioCodec name="ac3">
+      <Limitations>
+        <UpperBound name="audio.channels" value="6" />
+      </Limitations>
+    </VideoAudioCodec>
+  </CodecProfiles>
+  <TranscodeTargetProfiles>
+    <VideoTranscodeTarget protocol="*" context="all">
+      <VideoCodec name="*">
+        <Limitations>
+          <!-- Windows doesn't appear to play 10-bit h264 -->
+          <UpperBound name="video.bitDepth" value="8" isRequired="false" />
+        </Limitations>
+      </VideoCodec>
+    </VideoTranscodeTarget>
+  </TranscodeTargetProfiles>
+</Client>
