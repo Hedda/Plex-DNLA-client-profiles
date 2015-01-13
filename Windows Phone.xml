@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Client name="Windows Phone">
+  <!-- Author: Plex Inc. -->
+  <!-- cf http://msdn.microsoft.com/en-us/library/windowsphone/develop/ff462087(v=vs.105).aspx/css -->
+  <TranscodeTargets>
+    <VideoProfile protocol="hls" container="mpegts" codec="h264" audioCodec="aac" context="streaming">
+      <!-- Inspired by Handbrake's Universal profile -->
+      <Setting name="VideoEncodeFlags" value="-x264opts cabac=0" />
+      <Setting name="SubtitleSize" value="100" />
+    </VideoProfile>
+    <VideoProfile container="mp4" codec="h264" audioCodec="aac" context="static" />
+    <MusicProfile container="mp3" codec="mp3" />
+    <PhotoProfile container="jpeg" />
+  </TranscodeTargets>
+  <DirectPlayProfiles>
+    <VideoProfile container="mp4,mov" codec="h264" audioCodec="aac,mp3" />
+    <VideoProfile container="asf" codec="wmv2,wmv3,vc1" audioCodec="wmav2,wmapro,wmavoice" />
+    <MusicProfile container="asf" codec="wmav2,wmapro,wmavoice" />
+    <MusicProfile container="mp4,aac" codec="aac" />
+    <MusicProfile container="mp3" codec="mp3" />
+    <PhotoProfile container="jpeg,png,gif,bmp" />
+  </DirectPlayProfiles>
+  <CodecProfiles>
+    <VideoCodec name="*">
+      <Limitations>
+        <UpperBound name="video.width" value="1920" />
+        <UpperBound name="video.height" value="1080" />
+        <UpperBound name="video.bitrate" value="40000" isRequired="false" />
+      </Limitations>
+    </VideoCodec>
+    <VideoAudioCodec name="*">
+      <Limitations>
+        <UpperBound name="audio.channels" value="2" />
+      </Limitations>
+    </VideoAudioCodec>
+    <VideoAudioCodec name="aac">
+      <Limitations>
+        <NotMatch name="audio.profile" value="main" />
+        <UpperBound name="audio.samplingRate" value="48000" />
+      </Limitations>
+    </VideoAudioCodec>
+    <MusicCodec name="aac">
+      <Limitations>
+        <NotMatch name="audio.profile" value="main" />
+        <UpperBound name="audio.samplingRate" value="48000" />
+      </Limitations>
+    </MusicCodec>
+  </CodecProfiles>
+  <TranscodeTargetProfiles>
+    <VideoTranscodeTarget protocol="*" context="all">
+      <VideoCodec name="*">
+        <Limitations>
+          <NotMatch name="video.headerStripping" value="1" isRequired="false" />
+          <Match name="video.headerCompression" value="" isRequired="false" />
+          <UpperBound name="video.bitDepth" value="8" isRequired="false" />
+          <NotMatch name="video.anamorphic" value="1" isRequired="false" />
+          <NotMatch name="video.hasScalingMatrix" value="1" isRequired="false" />
+        </Limitations>
+      </VideoCodec>
+    </VideoTranscodeTarget>
+  </TranscodeTargetProfiles>
+</Client>
