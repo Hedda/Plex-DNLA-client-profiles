@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Client name="Mystery 4">
+  <!-- Author: Plex Inc. -->
+  <TranscodeTargets>
+    <VideoProfile protocol="hls" container="mpegts" codec="h264" audioCodec="aac" context="streaming">
+       <Setting name="VideoEncodeFlags" value="-x264opts cabac=0:level=4.0:ref=4" />
+    </VideoProfile>
+  </TranscodeTargets>
+  <DirectPlayProfiles>
+    <VideoProfile container="mp4" codec="h264" audioCodec="aac" />
+  </DirectPlayProfiles>
+  <ContainerProfiles>
+    <VideoContainer name="mp4">
+      <Limitations>
+        <Match name="part.optimizedForStreaming" value="1" />
+      </Limitations>
+    </VideoContainer>
+  </ContainerProfiles>
+  <CodecProfiles>
+    <VideoCodec name="*">
+      <Limitations>
+        <UpperBound name="video.width" value="1920" />
+        <UpperBound name="video.height" value="1080" />
+        <UpperBound name="video.bitDepth" value="8" isRequired="false" />
+      </Limitations>
+    </VideoCodec>
+    <VideoAudioCodec name="aac">
+      <Limitations>
+        <UpperBound name="audio.channels" value="6" />
+        <LowerBound name="audio.bitrate" value="96" />
+        <UpperBound name="audio.bitrate" value="256" />
+        <LowerBound name="audio.samplingRate" value="32000" />
+        <UpperBound name="audio.samplingRate" value="48000" />
+        <Match name="audio.samplingRate" regex="32000|44100|48000" />
+      </Limitations>
+    </VideoAudioCodec>
+  </CodecProfiles>
+</Client>
