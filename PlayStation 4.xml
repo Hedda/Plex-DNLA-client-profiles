@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Client name="PlayStation 4">
+   <!-- Author: Plex Inc. -->
+   <Identification>
+	  <Header name="User-Agent" substring="UPnP/1.0 DLNADOC/1.50" />
+	  <Header name="User-Agent" substring="PS4Application" />
+	  <Header name="User-Agent" substring="PlayStation 4" />
+	  <Header name="X-AV-Client-Info" substring="PlayStation 4" />
+   </Identification>
+   <TranscodeTargets>
+   	  <VideoProfile container="mpegts" audioCodec="aac,ac3" codec="h264">
+		 <Setting name="VideoEncodeFlags" value="-x264opts cabac=1" />
+	  </VideoProfile>
+	  <MusicProfile container="mp3" codec="mp3" />
+	  <PhotoProfile container="jpeg" />
+   </TranscodeTargets>
+   <DirectPlayProfiles>
+	  <VideoProfile container="mpegts" codec="mpeg2video,h264,mpeg4" audioCodec="ac3,aac,mp3" />
+	  <VideoProfile container="mp4" codec="mpeg2video,h264,mpeg4" audioCodec="ac3,aac,mp3" />
+	  <VideoProfile container="mov" codec="mpeg2video,h264,mpeg4" audioCodec="ac3,aac,mp3" />
+	  <VideoProfile container="mkv" codec="mpeg2video,h264,mpeg4" audioCodec="ac3,aac,mp3" />
+	  <VideoProfile container="avi" codec="mpeg2video,h264,mpeg4" audioCodec="ac3,aac,mp3" />
+	  <MusicProfile container="mp3" codec="mp3" />
+	  <MusicProfile container="mp4" codec="aac" />
+	  <PhotoProfile container="jpeg,bmp,png" />
+   </DirectPlayProfiles>
+   <CodecProfiles>
+	  <VideoCodec name="mpeg2video">
+		 <Limitations>
+			<UpperBound name="video.width" value="1920" />
+			<UpperBound name="video.height" value="1080" />
+			<UpperBound name="video.bitrate" value="20000" />
+		 </Limitations>
+	  </VideoCodec>
+	  <VideoCodec name="h264,mpeg4">
+		 <Limitations>
+			<UpperBound name="video.width" value="1920" />
+			<UpperBound name="video.height" value="1080" />
+			<UpperBound name="video.bitrate" value="20000" />
+		 </Limitations>
+	  </VideoCodec>
+	  <VideoAudioCodec name="ac3,aac">
+		 <Limitations>
+			<UpperBound name="audio.channels" value="6" />
+		 </Limitations>
+	  </VideoAudioCodec>
+	  <VideoAudioCodec name="mp3">
+		 <Limitations>
+			<UpperBound name="audio.channels" value="2" />
+		 </Limitations>
+	  </VideoAudioCodec>
+	  <MusicCodec name="aac">
+		 <Limitations>
+			<UpperBound name="audio.channels" value="2" />
+		 </Limitations>
+	  </MusicCodec>
+   </CodecProfiles>
+   <ContainerProfiles>
+	  <PhotoContainer name="*">
+		 <Limitations>
+			<UpperBound name="media.width" value="1920" />
+			<UpperBound name="media.height" value="1080" />
+		 </Limitations>
+	  </PhotoContainer>
+   </ContainerProfiles>
+</Client>
